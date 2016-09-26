@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="cache-control" content="no-cache">
+        <!--script type="text/javascript" src="http://getfirebug.com/firebug-lite.js#startOpened"></script-->
+        <link rel="stylesheet" type="text/css" href="normalize.css">
+        <link rel="stylesheet" type="text/css" href="demo.css">
+	</head>
+	<body>
+        <div id="logger" style="font:10px Consolas;color:black;position:absolute;width:50%;height:300px;background-color:white;z-index:9999;overflow:auto;"></div>
+        <div id="container">
+            <div id="container-right">
+                <div>HEADER</div>
+                <div id="scroller1" style="color: red; font-size: 50px;"></div>
+                <div>FOOTER</div>
+            </div>
+            <div id="container-left">
+                <div></div>
+                <div id="scroller2" style="color: yellow; font-size: 100px;"></div>
+            </div>
+        </div>
+        <div id="footer">
+            <div id="scroller3" style="color: black; font-size: 50px;">
+            </div>
+            <div>
+                <img src="images/logo.png"></div>
+            </div>
+        </div>
+        <script type="text/javascript" src="scroller/frame.js"></script>
+        <script type="text/javascript" src="scroller/media-frame-base.js"></script>
+        <script type="text/javascript" src="scroller/image-frame.js"></script>
+        <script type="text/javascript" src="scroller/video-frame.js"></script>
+        <script type="text/javascript" src="scroller/text-frame.js"></script>
+        <script type="text/javascript" src="scroller/scroller.js"></script>
+        <script type="text/javascript">
+            const logger = document.getElementById("logger");
+            
+            console.log = function(message) {
+                const date = new Date();
+
+                const hours = date.getHours() <= 9 ? "0" + date.getHours() : date.getHours();
+                const minutes = date.getMinutes() <= 9 ? "0" + date.getMinutes() : date.getMinutes();
+                const seconds = date.getSeconds() <= 9 ? "0" + date.getSeconds() : date.getSeconds();
+
+                logger.innerHTML = `${hours}:${minutes}:${seconds} ${message}<br />${logger.innerHTML}`;
+            }
+
+            const scroller1 = new Scroller();
+            scroller1.attachTo(document.getElementById("scroller1"));
+            scroller1.addFrame(new TextFrame("Your password is pitifully obvious.", { font: "48px Arial" }));
+            scroller1.addFrame(new ImageFrame("media/1.jpg", 10));
+            scroller1.addFrame(new TextFrame("Feeling amorous, she looked under the sheets and cried, \"Oh, no, it's Microsoft!\""));
+            scroller1.addFrame(new ImageFrame("media/2.jpg", 5));
+            scroller1.addFrame(new VideoFrame("media/1.mp4", 40));
+            scroller1.addFrame(new TextFrame("MESSAGE ACKNOWLEDGED -- The Pershing II missiles have been launched."));
+            scroller1.addFrame(new VideoFrame("media/2.mp4", 300));
+            scroller1.start();
+
+            const scroller2 = new Scroller();
+            scroller2.attachTo(document.getElementById("scroller2"));
+            scroller2.addFrame(new VideoFrame("media/3.mp4", 100));
+            scroller2.addFrame(new ImageFrame("media/3.jpg", 10));
+            scroller2.addFrame(new TextFrame("System going down at 1:45 this afternoon for disk crashing."));
+            scroller2.addFrame(new VideoFrame("media/4.mp4", 60));
+            scroller2.addFrame(new TextFrame("fortune: cpu time/usefulness ratio too high -- core dumped."));
+            scroller2.addFrame(new ImageFrame("media/4.jpg", 5));
+            scroller2.addFrame(new TextFrame("The computer is to the information industry roughly what the central power station is to the electrical industry. -- Peter Drucker"));
+            scroller2.addFrame(new ImageFrame("media/5.mp4", 60));
+            scroller2.start();
+
+            const scroller3 = new Scroller();
+            scroller3.attachTo(document.getElementById("scroller3"));
+            scroller3.addFrame(new TextFrame("Unix is the worst operating system; except for all others. -- Berry Kercheval"));
+            scroller3.addFrame(new TextFrame("A LISP programmer knows the value of everything, but the cost of nothing. -- Alan Perlis"));
+            scroller3.addFrame(new TextFrame("Thus spake the master programmer: \"You can demonstrate a program for a corporate executive, but you can't make him computer literate.\" -- Geoffrey James, \"The Tao of Programming\""));
+            scroller3.addFrame(new TextFrame("A list is only as strong as its weakest link. -- Don Knuth"));
+            scroller3.start();
+        </script>
+	</body>
+</html>
